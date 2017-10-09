@@ -1,15 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
 def homepage():
 
-    return """
-    <h1>Hello heroku</h1>
-    <p>It is currently</p>
-
-    """
+    return render_template('index.html')
+    # return """<h1>Hello heroku</h1><p>It is currently</p>"""
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
