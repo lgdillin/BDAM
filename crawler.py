@@ -36,9 +36,7 @@ if (not api):
 # client = MongoClient('mongodb://heroku_n2tfcpfx:d09ttqk88oe9r5ag0v2okkj0bs@dbh30.mlab.com:27307/heroku_n2tfcpfx', 27307)
 # client = open(os.path.dirname(os.path.realpath("test.txt")), "r")
 # print(client.read())
-client = MongoClient('localhost', 27017)
-
-client = MongoClient()
+client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
 db = client['MONGODB']
 
 start_time = time.time()
@@ -49,7 +47,7 @@ last_mon = str(datetime.date.today() -
 searchQuery = ['#news', '#sport', '#BREAKING']
 
 
-def crawler(searchQuery, maxTweets=100000, tweetsPerQry=100):
+def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
     for word in searchQuery:
         max_id = -1# LS
         tweetCount = 0
