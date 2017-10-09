@@ -3,3 +3,4 @@ gunicorn
 pymongo
 tweepy
 werkzeug
+pprint
