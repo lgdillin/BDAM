@@ -8,5 +8,9 @@ def homepage():
     return render_template('index.html')
     # return """<h1>Hello heroku</h1><p>It is currently</p>"""
 
+@app.route('/query')
+def query():
+    return 'click'
+
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
