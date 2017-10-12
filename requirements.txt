@@ -4,3 +4,8 @@ pymongo
 tweepy
 werkzeug
 pprint
+nltk
+datetime
+StringIO
+random
+json
