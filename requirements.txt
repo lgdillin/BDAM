@@ -9,3 +9,4 @@ datetime
 StringIO
 random
 json
+bson.code

@@ -1,21 +1,28 @@
 import pprint, json
+import pymongo
 from pymongo import MongoClient
+from bson.code import Code
 
-def populate():
-    client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-    db = client['MONGODB']
-    collection = db['MONGODB']
 
-    #Populate with some values
-    post = {"content":"One day I woke up and took a shit and then went to walmart. I saw a giant bread toaster"}
-    post_id = collection.insert(post)
-    post = {"content":"Yesterday on the news a brown person are abused by the police"}
-    post_id = collection.insert(post)
-    post = {"content":"Words in a string are useful sometimes, the context is irrelevant"}
-    return
+def topFive():
+    client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
+    db = client['tweets']
+    collection = db['twitter_sport']
+
+    map = Code(open('map.js', 'r').read())
+    reduce = Code(open('reduce.js', 'r').read())
+    result = db.twitter_sport.map_reduce(map, reduce, """{out: {inline:1}}""")
+    resultstring = ""
+    #for doc in result.find().sort( { total: -1 } ):
+    #for doc in result.find():
+    #sorted = result.find().sort('value', pymongo.DESCENDING)
+    for doc in result.find():
+        resultstring = resultstring + pprint.pformat(doc);
+
+    return resultstring
 
 # Query the server
-def query():
+def queryy():
     client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
     db = client['MONGODB']
     collection = db['MONGODB']

@@ -1,8 +1,10 @@
-import time
 import datetime
-from pymongo import MongoClient
 import json
+import time
 import tweepy
+
+from bson.code import Code
+from pymongo import MongoClient
 from tweepy import OAuthHandler
 #############
 #   PyMongo can be installed with pip: pip install pymongo
@@ -36,8 +38,10 @@ if (not api):
 # client = MongoClient('mongodb://heroku_n2tfcpfx:d09ttqk88oe9r5ag0v2okkj0bs@dbh30.mlab.com:27307/heroku_n2tfcpfx', 27307)
 # client = open(os.path.dirname(os.path.realpath("test.txt")), "r")
 # print(client.read())
-client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-db = client['MONGODB']
+#client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
+
+client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
+db = client['tweets']
 
 start_time = time.time()
 last_sun = str(datetime.date.today() -
@@ -45,6 +49,8 @@ last_sun = str(datetime.date.today() -
 last_mon = str(datetime.date.today() -
                datetime.timedelta(days=datetime.date.today().weekday() + 7))
 searchQuery = ['#news', '#sport', '#BREAKING']
+
+
 
 
 def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):

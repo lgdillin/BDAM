@@ -13,8 +13,9 @@ def homepage():
 
 @app.route('/query/')
 def returnRecord():
-    # return pprint.pprint(reader.query())
-    return reader.query()
+    return reader.topFive()
+    #return pprint.pprint(reader.query())
+    #return render_template('querypage.html', )
 
 @app.route('/populate/')
 def populate():

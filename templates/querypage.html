@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+  <head></head>
+  <body>
+    Click to show the top 5 tweeters with the most tweets
+    <ul id="output">
+    <a href="/query/">query</a>
+    <p id="top5"></p>
+  </body>
+
+  <script>
+  var obj = JSON.parse();
+  document.getElementById("top5").innerHTML = obj._id + " Posted " + obj.value + "Tweets";
+  </script>
+</html>
