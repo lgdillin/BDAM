@@ -19,7 +19,7 @@ def topFive(hashtag):
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
     pipeline = [ {"$unwind": "$user.name"}, {"$group": {"_id": "$user.name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
-    return dumps(list(collection.aggregate(pipeline))
+    return dumps(list(collection.aggregate(pipeline)))
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
