@@ -15,9 +15,14 @@ def homepage():
 @app.route('/search/<hashtag>/')
 def search(hashtag):
     crawler.initializeCrawler(hashtag)
+    return render_template('complete.html')
+    #return render_template('index.html', hashtag=hashtag)
+
+@app.route('/results/')
+def results():
+    hashtag = "sport"
     data = reader.topFive(hashtag)
     return render_template('querypage.html', data=data)
-    #return render_template('index.html', hashtag=hashtag)
 
 @app.route('/query/')
 def query():
