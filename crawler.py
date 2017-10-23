@@ -38,10 +38,13 @@ if (not api):
 # client = MongoClient('mongodb://heroku_n2tfcpfx:d09ttqk88oe9r5ag0v2okkj0bs@dbh30.mlab.com:27307/heroku_n2tfcpfx', 27307)
 # client = open(os.path.dirname(os.path.realpath("test.txt")), "r")
 # print(client.read())
-client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-
+#client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
 #client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
 #client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+
+
+
+client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
 db = client['bdam']
 
 start_time = time.time()
@@ -91,4 +94,3 @@ def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
                 # Just exit if any error
                 print("some error : " + str(e))
                 break
-initializeCrawler("sport")
