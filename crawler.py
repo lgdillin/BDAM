@@ -3,7 +3,6 @@ import json
 import time
 import tweepy
 
-from bson import bson.code
 from bson.code import Code
 from pymongo import MongoClient
 from tweepy import OAuthHandler
@@ -94,4 +93,3 @@ def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
                 # Just exit if any error
                 print("some error : " + str(e))
                 break
-initializeCrawler('sport')
