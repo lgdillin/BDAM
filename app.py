@@ -23,7 +23,7 @@ def search(hashtag):
 def returnResults():
     hashtag='BREAKING'
     data = reader.topFive(hashtag)
-    return data
+    return "he"
     #return render_template('querypage.html', data=data)
 
 # Used for drawing lexical graphs
