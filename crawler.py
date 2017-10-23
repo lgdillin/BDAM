@@ -40,8 +40,11 @@ if (not api):
 # print(client.read())
 #client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
 
-client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
-db = client['tweets']
+#client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
+client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+
+print(client)
+db = client['bdam']
 
 start_time = time.time()
 last_sun = str(datetime.date.today() -
@@ -80,7 +83,7 @@ def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
                     break
 
                 for tweet in new_tweets:
-                    # print(tweet)
+                    # Insert tweets into MongoDB
                     collection.insert(json.loads(json.dumps(tweet._json)))
 
                 tweetCount += len(new_tweets)

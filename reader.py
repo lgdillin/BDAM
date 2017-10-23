@@ -10,16 +10,18 @@ def query():
 
 def topFive(hashtag):
     # Create a connection
-    client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
-    db = client['tweets']
-    #collection = db['twitter_{0}'.format(hashtag)]
-    collection = db['twitter_BREAKING']
-    collectionName = 'twitter_{0}'.format(hashtag)
+    #client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    db = client['bdam']
+    collection = db['twitter_{0}'.format(hashtag)]
+    print(collection)
 
     # Execute the map and reduce JavaScript files
-    map = Code(open('map.js', 'r').read())
-    reduce = Code(open('reduce.js', 'r').read())
-    result = db['twitter_{0}'.format(hashtag)].map_reduce(map, reduce, "result")
+    #map = Code(open('map.js', 'r').read())
+    #reduce = Code(open('reduce.js', 'r').read())
+    map = Code("function map() {var user = this.user.name.match(/\w+/g);if(user == null) {return;}for(var i = 0; i < user.length; ++i) {emit(this.user[i], {count:1});}}")
+    reduce = Code("function reduce(key, values) {var total = 0;for(var i = 0; i < values.length; ++i) {total += values[i].count;}return {count: total};}")
+    result = collection.map_reduce(map, reduce, "result")
 
     # Sort the query and map it into a dictionary
     sortedresult = result.find().sort([('value.count', -1)])
