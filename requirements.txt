@@ -7,4 +7,4 @@ werkzeug
 pprint
 nltk
 datetime
-bson.code
+bson.code==0.4.2
