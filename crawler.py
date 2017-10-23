@@ -93,3 +93,4 @@ def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
                 # Just exit if any error
                 print("some error : " + str(e))
                 break
+initializeCrawler('sport')
