@@ -20,9 +20,9 @@ def search(hashtag):
     #return render_template('index.html', hashtag=hashtag)
 
 @app.route('/query/')
-def returnResults():
+def query():
     hashtag='BREAKING'
-    data = reader.topFive(hashtag)
+    #data = reader.topFive(hashtag)
     return "he"
     #return render_template('querypage.html', data=data)
 
