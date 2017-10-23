@@ -13,7 +13,7 @@
       var dirtyString = '{{data}}';
       var sanitized = dirtyString.replace(/&#39;/g, "\"");
       console.log('{{data}}')
-      var dict = JSON.parse('{{data}}');
+      var dict = JSON.parse(sanitized);
       console.log(dict);
       document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
       for(key in dict) {
