@@ -20,6 +20,24 @@ def topFive(hashtag):
     collection = db['twitter_{0}'.format(hashtag)]
     pipeline = [ {"$unwind": "$user.name"}, {"$group": {"_id": "$user.name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
     return dumps(list(collection.aggregate(pipeline)))
+
+# This function is for debugging purposes.
+# It simply outputs the entire given collection as a JSON string
+def rawResponse(hashtag):
+    # Create a connection
+    print("Connecting..")
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    print("Connected.")
+
+    # Access database
+    db = client['bdam']
+    collection = db['twitter_{0}'.format(hashtag)]
+    return dumps(list(collection.find()))
+
+topFive("sport")
+#pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
+#client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
+#client = MongoClient('ds147034.mlab.com/tweets', 29435)
     #agg_results = json.load(list(collection.find()))
 
     #query = collection.find()
@@ -45,21 +63,3 @@ def topFive(hashtag):
     #    print(sr)
         #data.update({sr['_id']:sr['value']['count']})
     #return data
-
-# This function is for debugging purposes.
-# It simply outputs the entire given collection as a JSON string
-def rawResponse(hashtag):
-    # Create a connection
-    print("Connecting..")
-    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
-    print("Connected.")
-
-    # Access database
-    db = client['bdam']
-    collection = db['twitter_{0}'.format(hashtag)]
-    return dumps(list(collection.find()))
-
-topFive("sport")
-#pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
-#client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-#client = MongoClient('ds147034.mlab.com/tweets', 29435)
