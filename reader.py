@@ -23,7 +23,7 @@ def mostActiveTweeters(hashtag):
     json = json.loads(json.dumps(list(collection.aggregate(pipeline))))
     data = {}
     for doc in json:
-        data.update(doc{'_id'}:doc['count'])
+        data.update(doc['_id']:doc['count'])
     return data
     #return json.dumps(list(collection.aggregate(pipeline)), ensure_ascii=True).encode('utf8')
 
