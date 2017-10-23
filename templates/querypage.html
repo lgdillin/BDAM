@@ -11,7 +11,7 @@
   <script>
     function query() {
       var dirtyString = '{{data}}';
-      var sanitized = dirtyString.replace(/&#39/g, "\'");
+      var sanitized = dirtyString.replace(/&#39;/g, "\"");
       console.log('{{data}}')
       var dict = JSON.parse('{{data}}');
       console.log(dict);
