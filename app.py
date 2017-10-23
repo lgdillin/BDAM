@@ -14,7 +14,6 @@ def homepage():
 
 @app.route('/search/<hashtag>/')
 def search(hashtag):
-    #hashtag = "#" + hashtag
     crawler.initializeCrawler(hashtag)
     data = reader.topFive(hashtag)
     return render_template('querypage.html', data=data)
@@ -22,13 +21,9 @@ def search(hashtag):
 
 @app.route('/query/')
 def returnResults():
+    hashtag='BREAKING'
     data = reader.topFive(hashtag)
-    #return render_template('querypage.html', **result)
-    return render_template('index.html', data=data)
-
-@app.route('/analyze')
-def analyze():
-    return analysis()
+    return render_template('querypage.html', data=data)
 
 # Used for drawing lexical graphs
 @app.route("/simple.png")

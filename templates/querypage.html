@@ -4,16 +4,15 @@
 <html>
   <head></head>
   <body onload="query()">
-    <p id="top5"></p>
+    <div id="outputTitle"></div>
+    <div id="output"></div>
   </body>
 
   <script>
     function query() {
+      console.log('{{data}}');
       var dirtyString = '{{data}}';
-      console.log(dirtyString);
-      var dict = JSON.parse(dirtyString);
-
-      //var dict = JSON.parse(dirtyString.replace(/&#39;/g, '\"'));
+      var dict = JSON.parse(dirtyString.replace(/&#39;/g, '\"'));
       document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
       for(key in dict) {
         document.getElementById("output").innerHTML += ("<br>" + key + "   " + dict[key]);

@@ -12,15 +12,14 @@ def topFive(hashtag):
     # Create a connection
     client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
     db = client['tweets']
-    # 'twitter_{0}'.format(hashtag)
-    collection = db['twitter_{0}'.format(hashtag)]
+    #collection = db['twitter_{0}'.format(hashtag)]
+    collection = db['twitter_BREAKING']
     collectionName = 'twitter_{0}'.format(hashtag)
 
     # Execute the map and reduce JavaScript files
     map = Code(open('map.js', 'r').read())
     reduce = Code(open('reduce.js', 'r').read())
-    result = db.twitter_BREAKING.map_reduce(map, reduce, "twitter_news")
-    # ['twitter_{0}'.format(hashtag)]
+    result = db['twitter_{0}'.format(hashtag)].map_reduce(map, reduce, "result")
 
     # Sort the query and map it into a dictionary
     sortedresult = result.find().sort([('value.count', -1)])

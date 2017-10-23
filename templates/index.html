@@ -14,16 +14,6 @@
   </body>
 
   <script>
-
-    function displayQuery() {
-      var dirtyString = '{{data}}';
-      var dict = JSON.parse(dirtyString.replace(/&#39;/g, '\"'));
-      document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
-      for(key in dict) {
-        document.getElementById("output").innerHTML += ("<br>" + key + "   " + dict[key]);
-      }
-    }
-
     function direct() {
       var inputField = document.getElementById("hashtagValue").value;
       if(inputField.substring(0,1) == "#"
@@ -43,6 +33,5 @@
       return true;
       }
     }
-
   </script>
 </html>
