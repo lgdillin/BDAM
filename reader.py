@@ -8,27 +8,20 @@ from bson.json_util import dumps
 
 
 def topFive(hashtag):
-    # Create a connection
-    print("connecting")
-    #client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-    #client = MongoClient('ds147034.mlab.com/tweets', 29435)
-    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
-    print("connected")
-    db = client['bdam']
-    collection = db['twitter_sport']
-    #cursor = collection.find_one()
 
-    doc = db.twitter_sport.find()
+    # Create a connection
+    print("Connecting..")
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    print("Connected.")
+
+    # Access database
+    db = client['bdam']
+    collection = db['twitter_{0}'.format(hashtag)]
+
+    query = collection.find()
     l = list(doc)
-    #print(dumps(l))
-    #doc = json.dumps(doc)
-    #loaded_doc = json.loads(doc)
-    #loaded_doc['_id']
     type(doc)
     type(l)
-    #collection = db['twitter_{0}'.format(hashtag)]
-    #collectionName = 'twitter_{0}'.format(hashtag)
-    pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
     #db.command('aggregate', 'twitter_sport', pipeline=pipeline, explain=True)
     #return
     #result = list(collection.aggregate(pipeline))
@@ -44,11 +37,15 @@ def topFive(hashtag):
     # Sort the query and map it into a dictionary
     #sortedresult = result.find().sort([('value.count', -1)])
     #sortedresult = collection.aggregate(pipeline)
-    data = {}
+    data = json.loads(dumps(l))
     #for sr in cursor:
     #    print(sr)
         #data.update({sr['_id']:sr['value']['count']})
     print(data)
-    return dumps(l)
+    return data
 
     #return data
+
+    #pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
+    #client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
+    #client = MongoClient('ds147034.mlab.com/tweets', 29435)
