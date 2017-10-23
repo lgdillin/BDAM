@@ -22,7 +22,8 @@ def search(hashtag):
 def results():
     hashtag = "sport"
     data = reader.topFive(hashtag)
-    return render_template('querypage.html', data=data)
+    return data
+    #return render_template('querypage.html', data=data)
 
 @app.route('/query/')
 def query():
