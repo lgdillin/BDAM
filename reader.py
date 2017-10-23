@@ -8,7 +8,7 @@ from bson.json_util import dumps
 
 
 # under construction?
-def topFive(hashtag):
+def mostActiveTweeters(hashtag):
 
     # Create a connection
     print("Connecting..")
@@ -18,7 +18,7 @@ def topFive(hashtag):
     # Access database
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
-    pipeline = [ {"$unwind": "$user.name"}, {"$group": {"_id": "$user.name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
+    pipeline = [ {"$unwind": "$user.screen_name"}, {"$group": {"_id": "$user.screen_name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
     #return json.dumps(list(collection.aggregate(pipeline))).encode('utf8', 'ignore')
     return json.dumps(list(collection.aggregate(pipeline)), ensure_ascii=False).encode('utf8')
 
@@ -35,8 +35,6 @@ def rawResponse(hashtag):
     collection = db['twitter_{0}'.format(hashtag)]
     return dumps(list(collection.find()))
 
-
-topFive("sport")
 #pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
 #client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
 #client = MongoClient('ds147034.mlab.com/tweets', 29435)
