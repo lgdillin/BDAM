@@ -32,7 +32,7 @@ def rawResponse(hashtag):
     # Access database
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
-    return dumps(list(collection.find())).decode('utf-8')
+    return dumps(list(collection.find())).encode('ascii', 'ignore')
 
 
 topFive("sport")
