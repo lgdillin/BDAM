@@ -42,8 +42,6 @@ if (not api):
 
 #client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
 client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
-
-print(client)
 db = client['bdam']
 
 start_time = time.time()
