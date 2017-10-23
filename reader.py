@@ -32,7 +32,8 @@ def rawResponse(hashtag):
     # Access database
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
-    return dumps(list(collection.find()))
+    return dumps(list(collection.find())).decode('utf-8')
+
 
 topFive("sport")
 #pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
