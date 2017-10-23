@@ -2,8 +2,47 @@
 
 <html>
   <head></head>
-  <body>
-    <a href="/populate/">populate</a>
-    <a href="/query/">query database</a>
+  <body bgcolor="#FFFF99">
+    Enter a single hashtag into the input field below.  <br>
+    The App will crawl Twitter and download all tweets which match the given hashtag. <br>
+    Then those publishers will be drawn on the screen, along with their tweet counts <br>
+    With the most active publishers at the top <br><br>
+    Enter Hashtag: <input type="text" id="hashtagValue">
+    <button onclick="direct()">Download Tweets</button>
+    <div id="outputTitle"></div>
+    <div id="output"></div>
   </body>
+
+  <script>
+
+    function displayQuery() {
+      var dirtyString = '{{data}}';
+      var dict = JSON.parse(dirtyString.replace(/&#39;/g, '\"'));
+      document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
+      for(key in dict) {
+        document.getElementById("output").innerHTML += ("<br>" + key + "   " + dict[key]);
+      }
+    }
+
+    function direct() {
+      var inputField = document.getElementById("hashtagValue").value;
+      if(inputField.substring(0,1) == "#"
+      && alphanumeric(inputField.substring(1))
+      && !inputField.includes(" ")) {
+        var directoryString = inputField.substr(1);
+        location.href="/search/" + directoryString + "/";
+      } else {
+        alert("Not a valid hashtag!")
+      }
+    }
+
+    function alphanumeric(str) {
+      if(/[^a-zA-Z0-9]/.test(str)) {
+        return false;
+      } else {
+      return true;
+      }
+    }
+
+  </script>
 </html>

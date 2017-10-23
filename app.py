@@ -1,26 +1,30 @@
-import reader as reader
-import analyze as analyze
-
 from flask import Flask, render_template, make_response
 from datetime import datetime
+
+#scripts built for this app
+import analyze as analyze
+import crawler as crawler
+import reader as reader
+
 app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-
     return render_template('index.html')
-    # return """<h1>Hello heroku</h1><p>It is currently</p>"""
+
+@app.route('/search/<hashtag>/')
+def search(hashtag):
+    #hashtag = "#" + hashtag
+    crawler.initializeCrawler(hashtag)
+    data = reader.topFive(hashtag)
+    return render_template('querypage.html', data=data)
+    #return render_template('index.html', hashtag=hashtag)
 
 @app.route('/query/')
-def returnRecord():
-    return reader.topFive()
-    #return pprint.pprint(reader.query())
-    #return render_template('querypage.html', )
-
-@app.route('/populate/')
-def populate():
-    reader.populate()
-    return
+def returnResults():
+    data = reader.topFive(hashtag)
+    #return render_template('querypage.html', **result)
+    return render_template('index.html', data=data)
 
 @app.route('/analyze')
 def analyze():

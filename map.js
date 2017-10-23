@@ -10,8 +10,7 @@ function map() {
   }
 
   for(var i = 0; i < user.length; ++i) {
-    //emit(user[i], {count: 1});
-    emit(user[i], 1);
+    emit(this.user[i], {count:1});
   }
 
 }
