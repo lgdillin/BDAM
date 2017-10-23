@@ -6,7 +6,6 @@ werkzeug
 pprint
 nltk
 datetime
-StringIO
 random
 json
 bson.code
