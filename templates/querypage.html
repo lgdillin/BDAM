@@ -12,7 +12,7 @@
     function query() {
       console.log('{{data}}');
       var dirtyString = '{{data}}';
-      var dict = JSON.parse(dirtyString.replace("&#34;", '\"'));
+      var dict = JSON.parse(dirtyString.replace("&#34;", "\""));
       document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
       for(key in dict) {
         document.getElementById("output").innerHTML += ("<br>" + key + "   " + dict[key]);

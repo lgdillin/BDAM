@@ -19,8 +19,8 @@ def mostActiveTweeters(hashtag):
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
     pipeline = [ {"$unwind": "$user.screen_name"}, {"$group": {"_id": "$user.screen_name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
-    #return json.dumps(list(collection.aggregate(pipeline))).encode('utf8', 'ignore')
-    return json.dumps(list(collection.aggregate(pipeline)), ensure_ascii=True).encode('ascii')
+    return json.dumps(list(collection.aggregate(pipeline))).encode('ascii', 'ignore')
+    #return json.dumps(list(collection.aggregate(pipeline)), ensure_ascii=True).encode('ascii')
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
