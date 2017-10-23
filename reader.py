@@ -19,7 +19,7 @@ def topFive(hashtag):
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
     pipeline = [ {"$unwind": "$user.name"}, {"$group": {"_id": "$user.name", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])} ]
-    return dumps(list(collection.aggregate(pipeline)))
+    return dumps(list(collection.aggregate(pipeline))).encode('ascii', 'ignore')
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
@@ -32,7 +32,7 @@ def rawResponse(hashtag):
     # Access database
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
-    return dumps(list(collection.find())).encode('ascii', 'ignore')
+    return dumps(list(collection.find()))
 
 
 topFive("sport")
