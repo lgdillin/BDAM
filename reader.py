@@ -19,7 +19,7 @@ def topFive(hashtag):
     # Execute the map and reduce JavaScript files
     map = Code(open('map.js', 'r').read())
     reduce = Code(open('reduce.js', 'r').read())
-    result = db.twitter_news.map_reduce(map, reduce, collectionName)
+    result = db.twitter_BREAKING.map_reduce(map, reduce, "twitter_news")
     # ['twitter_{0}'.format(hashtag)]
 
     # Sort the query and map it into a dictionary
