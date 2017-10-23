@@ -6,6 +6,17 @@ from bson.code import Code
 from bson.son import SON
 from bson.json_util import dumps
 
+def rawResponse(hashtag):
+    # Create a connection
+    print("Connecting..")
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    print("Connected.")
+
+    # Access database
+    db = client['bdam']
+    collection = db['twitter_{0}'.format(hashtag)]
+    return dumps(list(collection.find()))
+
 
 def topFive(hashtag):
 

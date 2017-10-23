@@ -25,6 +25,10 @@ def results():
     return data
     #return render_template('querypage.html', data=data)
 
+@app.route('/access/<hashtag>')
+def access(hashtag):
+    return reader.rawResponse(hashtag)
+
 @app.route('/query/')
 def query():
     hashtag='BREAKING'
