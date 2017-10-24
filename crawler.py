@@ -64,7 +64,7 @@ def initializeCrawler(hashtag):
 
 
 
-def crawler(searchQuery, maxTweets=1000, tweetsPerQry=1000):
+def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
     #for word in searchQuery:
         print(searchQuery)
         max_id = -1# LS
