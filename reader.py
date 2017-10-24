@@ -40,7 +40,6 @@ def getUserTweets(hashtag, screen_name):
         data.update({doc['_id']:doc['text']})
     return data
 
-getUserTweets('test', 'sapao123456')
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
 def rawResponse(hashtag):
