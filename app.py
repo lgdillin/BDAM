@@ -23,9 +23,9 @@ def results(hashtag):
     data = reader.mostActiveTweeters(hashtag)
     return render_template('querypage.html', data=data, hashtag=hashtag)
 
-@app.route('/results/<hashtag>/<screen_name>/tweets')
+@app.route('/results/<hashtag>/<screen_name>/tweets/')
 def userTweets(hashtag, screen_name):
-    tweets = reader.getUserTweets(screen_name)
+    tweets = reader.getUserTweets(hashtag, screen_name)
     return render_template('tweets.html', tweets=tweets)
 
 # Used for debugging. Outputs raw JSON from query
