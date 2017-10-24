@@ -17,7 +17,8 @@
       console.log(dict);
       document.getElementById("outputTitle").innerHTML = ("Publisher  |  Number of Tweets<br>");
       for(key in dict) {
-        document.getElementById("output").innerHTML += ("<br>" + key + "   " + dict[key]);
+        href = "/results/" + '{{hashtag}}' + "/" + key + "/tweets/";
+        document.getElementById("output").innerHTML += ("<br>" + "<a href=\"" + href + "\">" + key + "</a>   " + dict[key]);
       }
     }
   </script>

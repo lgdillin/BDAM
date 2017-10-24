@@ -21,18 +21,17 @@ def search(hashtag):
 @app.route('/results/<hashtag>/')
 def results(hashtag):
     data = reader.mostActiveTweeters(hashtag)
-    return render_template('querypage.html', data=data)
+    return render_template('querypage.html', data=data, hashtag=hashtag)
 
+@app.route('/results/<hashtag>/<screen_name>/tweets')
+def userTweets(hashtag, screen_name):
+    tweets = reader.getUserTweets(screen_name)
+    return render_template('tweets.html', tweets=tweets)
+
+# Used for debugging. Outputs raw JSON from query
 @app.route('/access/<hashtag>/')
 def access(hashtag):
     return reader.rawResponse(hashtag)
-
-@app.route('/query/')
-def query():
-    hashtag='BREAKING'
-    #data = reader.topFive(hashtag)
-    return "he"
-    #return render_template('querypage.html', data=data)
 
 # Used for drawing lexical graphs
 @app.route("/simple.png")

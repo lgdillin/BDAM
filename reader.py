@@ -27,6 +27,12 @@ def mostActiveTweeters(hashtag):
     return data
     #return json.dumps(list(collection.aggregate(pipeline)), ensure_ascii=True).encode('utf8')
 
+def getUserTweets(hashtag, screen_name):
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    db = client['bdam']
+    collection = db['twitter_{0}'.format(hashtag)]
+    
+
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
 def rawResponse(hashtag):
