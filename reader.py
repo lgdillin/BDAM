@@ -33,14 +33,14 @@ def getUserTweets(hashtag, screen_name):
     collection = db['twitter_{0}'.format(hashtag)]
     #pipeline = [ {"$unwind": "$user.screen_name"}, {"$group": {"_id": "$user.screen_name", "text": "$text"}} ]
     #results = collection.find( {'user.{0}'.format(screen_name) : '{0}'.format(screen_name)}, {'text':1, '_id':0})
-    results = collection.find( {'user.screen_name': screen_name}, {'text':1, '_id':0} )
+    results = collection.find( {'user.screen_name': screen_name}, {'text':1, 'user.screen_name':1, '_id':0} )
 
     #jsonOut = json.loads(json.dumps(list(collection.aggregate(pipeline))))
     data = {}
-    #for doc in results:
-    #    data.update({doc['user.screen_name']:doc['text']})
+    for doc in results:
+        data.update({doc['user.screen_name']:doc['text']})
+    print(data)
     print(dumps(list(results)))
-    print(results)
     return dumps(list(results))
 
 # This function is for debugging purposes.
