@@ -56,8 +56,8 @@ last_mon = str(datetime.date.today() -
 
 def initializeCrawler(hashtag):
     # Query terms for twitter
-    #searchQuery = ['#news', '#sport', '#BREAKING']
-    searchQuery = hashtag
+    searchQuery = ['#news']
+    #searchQuery = hashtag
 
     # Execute the Crawler
     crawler(searchQuery=searchQuery)
@@ -66,6 +66,7 @@ def initializeCrawler(hashtag):
 
 def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
     for word in searchQuery:
+        print(word)
         max_id = -1# LS
         tweetCount = 0
         collection = db['twitter_{0}'.format(searchQuery)]
