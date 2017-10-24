@@ -38,7 +38,8 @@ def getUserTweets(hashtag, screen_name):
     data = {}
     for doc in results:
         data.update({doc['_id']:doc['text']})
-    return data
+    print(data)
+    return dumps(list(results))
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
