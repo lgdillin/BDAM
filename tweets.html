@@ -1,13 +1,23 @@
 <html>
   <head></head>
-  <body bgcolor="#FFFF99">
-    Job complete. Click to visit results
-    <button onclick="resultPage()">Download Tweets</button>
+  <body bgcolor="#CCCCCC" onload="printTweets()">
+    <div id="outputTitle"></div>
+    <div id="output"></div>
   </body>
 
   <script>
-    function resultPage() {
-      location.href="/results/{{hashtag}}/";
+    function printTweets() {
+      var tweets = '{{tweets}}';
+      var sanitized = dirtyString.replace(/&#39;/g, "\"");
+      console.log('{{tweets}}')
+      var dict = JSON.parse(sanitized);
+      console.log(dict);
+      document.getElementById("outputTitle").innerHTML = ("Tweets related to: ");
+      for(key in dict) {
+        //href = "/results/" + '{{hashtag}}' + "/" + key + "/tweets/";
+        //document.getElementById("output").innerHTML += ("<br>" + "<a href=\"" + href + "\">" + key + "</a>   " + dict[key]);
+        document.getElementById("output").innerHTML += ("<br>" + dict[key]);
+      }
     }
   </script>
 </html>
