@@ -3,6 +3,7 @@
   <body bgcolor="#CCCCCC" onload="printTweets()">
     <div id="outputTitle"></div>
     <div id="output"></div>
+    <br> NOTE: Tweets are not guaranteed to be organized chronologically.
   </body>
 
   <script>
@@ -10,13 +11,15 @@
       var tweets = '{{tweets}}';
       var sanitized = tweets.replace(/&#39;/g, "\"");
       var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
-      document.getElementById("outputTitle").innerHTML = ("Tweets related to: ");
+      document.getElementById("outputTitle").innerHTML = ("Tweets published by: " + '{{publisher}}' + " under hashtag: #" + '{{hashtag}}');
       console.log(dict);
+
+      var count = 0;
       for(key in dict) {
         //href = "/results/" + '{{hashtag}}' + "/" + key + "/tweets/";
         //document.getElementById("output").innerHTML += ("<br>" + "<a href=\"" + href + "\">" + key + "</a>   " + dict[key]);
         console.log(dict[key]);
-        document.getElementById("output").innerHTML += ("<br>" + dict[key].text);
+        document.getElementById("output").innerHTML += ("<br>Tweet #" + count + ":  " + dict[key].text);
       }
     }
   </script>

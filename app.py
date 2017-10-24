@@ -26,7 +26,7 @@ def results(hashtag):
 @app.route('/results/<hashtag>/<screen_name>/tweets/')
 def userTweets(hashtag, screen_name):
     tweets = reader.getUserTweets(hashtag, screen_name)
-    return render_template('tweets.html', tweets=tweets)
+    return render_template('tweets.html', tweets=tweets, publisher=screen_name, hashtag=hashtag)
 
 # Used for debugging. Outputs raw JSON from query
 @app.route('/access/<hashtag>/')
