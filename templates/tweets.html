@@ -8,16 +8,15 @@
   <script>
     function printTweets() {
       var tweets = '{{tweets}}';
-      console.log('{{tweets}}')
       var sanitized = tweets.replace(/&#39;/g, "\"");
-      console.log(sanitized);
       var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
-      console.log(dict);
       document.getElementById("outputTitle").innerHTML = ("Tweets related to: ");
+      console.log(dict);
       for(key in dict) {
         //href = "/results/" + '{{hashtag}}' + "/" + key + "/tweets/";
         //document.getElementById("output").innerHTML += ("<br>" + "<a href=\"" + href + "\">" + key + "</a>   " + dict[key]);
-        document.getElementById("output").innerHTML += ("<br>" + dict[key]);
+        console.log(dict[key]);
+        document.getElementById("output").innerHTML += ("<br>" + dict[key].text);
       }
     }
   </script>
