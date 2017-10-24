@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 
 <html>
-  <head></head>
-  <body bgcolor="#FFFF99">
-    Enter a single hashtag into the input field below.  <br>
-    The App will crawl Twitter and download all tweets which match the given hashtag. <br>
-    Then those publishers will be drawn on the screen, along with their tweet counts <br>
-    With the most active publishers at the top <br><br>
-    Enter Hashtag: <input type="text" id="hashtagValue">
-    <button onclick="direct()">Download Tweets</button>
-    <div id="outputTitle"></div>
-    <div id="output"></div>
+  <head>
+  <link rel="stylesheet" href="index_styles.css">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+  <title>Tweet Finder</title>
+  <body bgcolor="#2E94D9">
+      <div id = "whiteScreen">
+        <!-- section title, "How It Works" -->
+        <p id = "howTitle">How It Works</p>
+        <!-- text for the "About" sectino -->
+        <p id = "howText" class = "how">
+        Enter a single hashtag into the input field below.  <br>
+        The App will crawl Twitter and download all tweets which match the given hashtag. <br>
+        Then those publishers will be drawn on the screen, along with their tweet counts <br>
+        With the most active publishers at the top <br><br>
+        Enter Hashtag: <input type="text" id="hashtagValue"></p>
+
+        <section class = "border">
+        <button onclick="direct()">Download Tweets</button>
+        </section>
+
+        <div id="outputTitle"></div>
+        <div id="output"></div>
+      </div>
   </body>
 
   <script>
