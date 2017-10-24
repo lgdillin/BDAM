@@ -37,9 +37,9 @@ def getUserTweets(hashtag, screen_name):
 
     #jsonOut = json.loads(json.dumps(list(collection.aggregate(pipeline))))
     data = {}
-    for doc in results:
-        data.update({doc['user.screen_name']:doc['text']})
-    print(data)
+    #for doc in results:
+    #    data.update({doc['user.screen_name']:doc['text']})
+    #print(data)
     print(dumps(list(results)))
     return dumps(list(results))
 
