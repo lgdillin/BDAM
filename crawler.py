@@ -66,6 +66,7 @@ def initializeCrawler(hashtag):
 
 def crawler(searchQuery, maxTweets=50, tweetsPerQry=50):
     #for word in searchQuery:
+        print(searchQuery)
         max_id = -1# LS
         tweetCount = 0
         collection = db['twitter_{0}'.format(searchQuery)]
@@ -74,10 +75,10 @@ def crawler(searchQuery, maxTweets=50, tweetsPerQry=50):
             try:
                 if (max_id <= 0):
                     new_tweets = api.search(lang="en",
-                                            q=word, count=tweetsPerQry, since=last_mon, until=last_sun)
+                                            q=searchQuery, count=tweetsPerQry, since=last_mon, until=last_sun)
                 else:
                     new_tweets = api.search(lang="en",
-                                            q=word, count=tweetsPerQry, since=last_mon, until=last_sun, max_id=str(max_id - 1))
+                                            q=searchQuery, count=tweetsPerQry, since=last_mon, until=last_sun, max_id=str(max_id - 1))
 
                 if not new_tweets:
                     print("No more tweets found")
