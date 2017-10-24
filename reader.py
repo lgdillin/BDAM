@@ -31,7 +31,13 @@ def getUserTweets(hashtag, screen_name):
     client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
     db = client['bdam']
     collection = db['twitter_{0}'.format(hashtag)]
-    
+    pipeline = [ {"$unwind": "$user.screen_name"}, {"$group": {"_id": "$user.screen_name", "text": "$text"}} ]
+
+    jsonOut = json.loads(json.dumps(list(collection.aggregate(pipeline))))
+    data = {}
+    for doc in jsonOut:
+        data.update({doc['_id']:doc['text']})
+    return data
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
