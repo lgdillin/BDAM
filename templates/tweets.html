@@ -8,8 +8,9 @@
   <script>
     function printTweets() {
       var tweets = '{{tweets}}';
-      var sanitized = dirtyString.replace(/&#39;/g, "\"");
       console.log('{{tweets}}')
+      var sanitized = tweets.replace(/&#39;/g, "\"");
+      console.log(sanitized);
       var dict = JSON.parse(sanitized);
       console.log(dict);
       document.getElementById("outputTitle").innerHTML = ("Tweets related to: ");
