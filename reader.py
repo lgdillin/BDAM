@@ -35,13 +35,13 @@ def getUserTweets(hashtag, screen_name):
     #results = collection.find( {'user.{0}'.format(screen_name) : '{0}'.format(screen_name)}, {'text':1, '_id':0})
     results = collection.find( {'user.screen_name': screen_name}, {'text':1, 'user.screen_name':1, '_id':0} )
 
-    #jsonOut = json.loads(json.dumps(list(collection.aggregate(pipeline))))
+    jsonOut = json.loads(results)
     data = {}
     for doc in results:
         data.update({doc['user']['screen_name']:doc['text']})
-    #print(data)
-    print(dumps(list(results)))
-    return dumps(list(results))
+    print(jsonOut)
+    print(data)
+    return data
 
 # This function is for debugging purposes.
 # It simply outputs the entire given collection as a JSON string
