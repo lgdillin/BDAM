@@ -38,7 +38,8 @@ def getUserTweets(hashtag, screen_name):
     data = {}
     for doc in results:
         for tweet in doc['text']:
-            data.update({doc['user']['screen_name']:doc['text'].append(tweet)})
+            print(tweet)
+            data.update({doc['user']['screen_name']:doc['text']})
     print(results)
     print(data)
     return data
