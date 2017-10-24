@@ -11,7 +11,7 @@
       console.log('{{tweets}}')
       var sanitized = tweets.replace(/&#39;/g, "\"");
       console.log(sanitized);
-      var dict = JSON.parse(sanitized);
+      var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
       console.log(dict);
       document.getElementById("outputTitle").innerHTML = ("Tweets related to: ");
       for(key in dict) {
