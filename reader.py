@@ -37,7 +37,7 @@ def getUserTweets(hashtag, screen_name):
 
     jsonOut = json.loads(json.dumps(list(results)))
     data = {}
-    for doc in results:
+    for doc in jsonOut:
         data.update({doc['user']['screen_name']:doc['text']})
     print(jsonOut)
     print(data)
