@@ -65,11 +65,11 @@ def initializeCrawler(hashtag):
 
 
 def crawler(searchQuery, maxTweets=50, tweetsPerQry=50):
-    for word in searchQuery:
+    #for word in searchQuery:
         print(word)
         max_id = -1# LS
         tweetCount = 0
-        collection = db['twitter_{0}'.format(word)]
+        collection = db['twitter_{0}'.format(searchQuery)]
         #collection = db['twitter_{0}'.format(word[1:])]
         while tweetCount < maxTweets:
             try:
