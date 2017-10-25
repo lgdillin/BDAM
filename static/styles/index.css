@@ -82,7 +82,7 @@ a {
 	line-height: 25px;
   padding: 0px;
   text-align: left;
-  padding-bottom: 100px;
+  padding-bottom: 150px;
 }
 
 span.bold{
@@ -139,9 +139,8 @@ button {
   appearance: none;
   box-shadow: none;
   border-radius: 0;
-  /*text-align: center;*/
   position: absolute;
-  top: 30%;
+  top: 40%;
 }
 
 button:focus {
