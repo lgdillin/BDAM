@@ -1,9 +1,19 @@
 <html>
-  <head></head>
-  <body bgcolor="#CCCCCC" onload="printTweets()">
-    <div id="outputTitle"></div>
-    <div id="output"></div>
-    <br><br><br><b>NOTE: Tweets are not guaranteed to be organized chronologically.</b>
+  <head>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='styles/tweets.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+  <title>Tweet Finder</title>
+  <body bgcolor="#2E94D9" onload="printTweets()">
+    <div id = "whiteScreen">
+      <div id="outputTitle"></div>
+      <div id="output"></div>
+      <br><br><br><b id = "bold" >NOTE: Tweets are not guaranteed to be organized chronologically.</b>
+      <!-- simple footer text -->
+      <p id = "footer">Built by Liam Dillingham, Garrett Graham</p>
+    </div>
   </body>
 
   <script>
