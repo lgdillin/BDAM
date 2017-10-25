@@ -1,0 +1,78 @@
+body{
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+  background-size: 100% 100%;
+}
+#whiteScreen{
+  background: rgb(255, 255, 255); /* fallback color */
+  background: rgba(255, 255, 255, 0.7);
+}
+
+#jobCompleteTitle{
+  font-family: 'Ubuntu', Georgia, Times, serif;
+	font-size: 25px;
+	line-height: 25px;
+  padding: 0px;
+  text-align: left;
+}
+
+#jobCompleteText{
+  font-family: 'Raleway', sans-serif;
+	font-size: 50;
+	line-height: 25px;
+  padding: 0px;
+  text-align: left;
+  padding-bottom: 150px;
+}
+
+#footer{
+  font-family: 'Raleway', sans-serif;
+	font-size: 16;
+	line-height: 25px;
+  padding: 0px;
+  text-align: left;
+}
+
+button {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 15px 45px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  position: absolute;
+  top: 40%;
+}
+
+button:focus {
+  outline: none
+}
+
+section.border {
+  text-align: center;
+}
+section.border button {
+  color: #6496c8;
+  background: rgba(0,0,0,0);
+  border: solid 5px #6496c8;
+}
+
+section.border button:focus,
+section.border button.focus {
+  border-color: #27496d;
+  color: #27496d;
+}
+section.border button:hover,
+section.border button.hover {
+  border-color: #346392;
+  color: #346392;
+}
+section.border button:active,
+section.border button.active {
+  border-color: #27496d;
+  color: #27496d;
+}

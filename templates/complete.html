@@ -1,8 +1,26 @@
 <html>
-  <head></head>
-  <body bgcolor="#FFFF99">
-    Job complete. Click to visit results
-    <button onclick="resultPage()">Download Tweets</button>
+  <head>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='styles/complete.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+  <title>Tweet Finder</title>
+  <body bgcolor="#2E94D9">
+      <div id = "whiteScreen">
+        <!-- section title, "Job Complete!" -->
+        <p id = "jobCompleteTitle">Job Complete!</p>
+        <!-- text for the "Job Complete!" section -->
+        <p id = "jobCompleteText" class = "complete">
+        Click to visit results:
+
+        <section class = "border">
+          <button onclick="resultPage()">Download Tweets</button>
+        </section>
+
+        <!-- simple footer text -->
+        <p id = "footer">Built by Liam Dillingham, Garrett Graham</p>
+      </div>
   </body>
 
   <script>
