@@ -141,6 +141,7 @@ button {
   border-radius: 0;
   position: absolute;
   top: 40%;
+  padding-left: 0px;
 }
 
 button:focus {
