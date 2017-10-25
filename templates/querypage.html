@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-
-
 <html>
-  <head></head>
-  <body bgcolor="#CCCCCC" onload="query()">
-    <div id="outputTitle"></div>
-    <div id="output"></div>
+  <head>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='styles/querypage.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+  <title>Tweet Finder</title>
+  <body bgcolor="#2E94D9" onload="query()">
+      <div id = "whiteScreen">
+        <div id="outputTitle"></div>
+        <div id="output"></div>
+        
+        <!-- simple footer text -->
+        <p id = "footer">Built by Liam Dillingham, Garrett Graham</p>
+      </div>
   </body>
 
   <script>
