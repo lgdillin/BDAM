@@ -140,8 +140,7 @@ button {
   box-shadow: none;
   border-radius: 0;
   position: absolute;
-  top: 40%;
-  padding-left: 0px;
+  top: 80%;
 }
 
 button:focus {
