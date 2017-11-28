@@ -19,6 +19,7 @@
   <script>
     function printTweets() {
       var tweets = '{{tweets}}';
+      console.log(tweets);
       var sanitized = tweets.replace(/&#39;/g, "\"");
       var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
       document.getElementById("outputTitle").innerHTML = ("Tweets published by: <b>" + '{{publisher}}' + "</b> under hashtag: <b>#" + '{{hashtag}}' + "</b>");
