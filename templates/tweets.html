@@ -1,4 +1,5 @@
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <head>
   <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='styles/tweets.css') }}">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
@@ -18,12 +19,23 @@
 
   <script>
     function printTweets() {
-      var tweets = '{{tweets}}';
-      console.log(tweets);
-      var sanitized = tweets.replace(/&#39;/g, "\"");
-      var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
-      document.getElementById("outputTitle").innerHTML = ("Tweets published by: <b>" + '{{publisher}}' + "</b> under hashtag: <b>#" + '{{hashtag}}' + "</b>");
+      var dict = {{tweets|tojson}};
+
+      // console.log(tweets);
+      // //var dict = JSON.parse(tweets);
+      // var parser = new DOMParser;
+      // var dom = parser.parseFromString(
+      //  '<!doctype html><body>' + tweets,
+      //  'text/html');
+      // var dict = dom.body.textContent;
+      //var dict = JSON.parse(sanitized.replace(/("([^"]|"")*")/g, "\""))
+
+      //console.log(sanitized);
+      //var sanitized = tweets.replace(/&#34;/g, "\"").replace(/&#39;/g, "'");
       console.log(dict);
+      //var dict = JSON.parse(sanitized);
+      //var dict = JSON.parse(sanitized.replace(/\r?\n|\r/g, ''));;
+      document.getElementById("outputTitle").innerHTML = ("Tweets published by: <b>" + '{{publisher}}' + "</b> under hashtag: <b>#" + '{{hashtag}}' + "</b>");
 
       var count = 1;
       for(key in dict) {

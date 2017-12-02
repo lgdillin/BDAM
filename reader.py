@@ -1,5 +1,6 @@
 import pprint, json
 import pymongo
+import ast
 
 from pymongo import MongoClient
 from bson.code import Code
@@ -33,13 +34,12 @@ def getUserTweets(hashtag, screen_name):
     collection = db['twitter_{0}'.format(hashtag)]
     #pipeline = [ {"$unwind": "$user.screen_name"}, {"$group": {"_id": "$user.screen_name", "text": "$text"}} ]
     #results = collection.find( {'user.{0}'.format(screen_name) : '{0}'.format(screen_name)}, {'text':1, '_id':0})
-    results = json.loads(json.dumps(list(collection.find( {'user.screen_name': screen_name}, {'text':1, 'user.screen_name':1, '_id':0} ))))
+    results = list(collection.find( {'user.screen_name': screen_name}, {'text':1, 'user.screen_name':1, '_id':0} ))
 
-    data = {}
-    print(results)
-    #for doc in results:
-    #    print(doc['text'])
-    #    data.update({doc['user']['screen_name']:doc['text']})
+    #results = json.dumps(jsonString.replace("\"", "\\\""))
+
+    #print(results)
+
     return results
 
 # This function is for debugging purposes.
