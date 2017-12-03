@@ -1,6 +1,5 @@
 import pprint, json
 import pymongo
-import ast
 
 from pymongo import MongoClient
 from bson.code import Code
