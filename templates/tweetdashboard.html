@@ -1,0 +1,37 @@
+<html>
+  <head>
+  </head>
+
+  <body bgcolor="#2E94D9" onload="parseColls()">
+    <h1 style="color: white;">Hashtag Collections</h1>
+    click on an individual hashtag to view the contents of that collection.<br>
+    check as many boxes as you wish and click the submit button to
+    use analytical tools to learn from the data
+    <div id="title"></div>
+    <form method="post" action="/analytics/" enctype="multipart/form-data" id="userform">
+      <table width="120px" id="dashboard">
+      </table>
+      <br>
+      <input type="submit" value="Submit selected">
+
+  </body>
+
+  <script>
+    function parseColls() {
+      var colls = {{collections|tojson}};
+      console.log(colls);
+
+      for(i in colls) {
+        //href = "/results/" + '{{hashtag}}' + "/" + key + "/tweets/";
+        //document.getElementById("output").innerHTML += ("<br>" + "<a href=\"" + href + "\">" + key + "</a>   " + dict[key]);
+        console.log(colls[i]);
+        var name = colls[i].substring(8);
+        document.getElementById("dashboard").innerHTML += (
+          "<tr><td><input type='checkbox' name='hashtags' value='"
+          + name + "'> -- <a style='color: white;' href=/results/"
+          + name + ">" + name + "</a></td></tr>"
+        );
+      }
+    }
+  </script>
+</html>

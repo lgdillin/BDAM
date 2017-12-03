@@ -55,6 +55,19 @@ def rawResponse(hashtag):
     collection = db['twitter_{0}'.format(hashtag)]
     return dumps(list(collection.find()))
 
+def tweetsDash():
+    # Create a Connection
+    print("Connecting...")
+    client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+    print("Connected")
+
+    db = client['bdam']
+    colls = db.collection_names()
+
+    colls.remove('system.indexes') # This is an Mlab specific command
+
+    return colls
+
 #pipeline = [{"$unwind": "$tags"}, {"$group": {"_id": "$tags", "count": {"$sum": 1}}}, {"$sort": SON([("count", -1), ("_id", -1)])}]
 #client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
 #client = MongoClient('ds147034.mlab.com/tweets', 29435)

@@ -1,0 +1,20 @@
+<html>
+  <head>
+  </head>
+
+  <title>Tweet Finder</title>
+
+  <body bgcolor="#2E94D9" onload="hashtags()">
+
+  </body>
+
+  <script>
+    function hashtags() {
+      var hashtags = {{hashtags|tojson}};
+      console.log(hashtags);
+      for(i in hashtags) {
+        //console.log(i);
+      }
+    }
+  </script>
+</html>
