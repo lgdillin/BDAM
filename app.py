@@ -44,9 +44,10 @@ def dashboard():
 def analytics():
     if request.method == 'POST':
         data = request.form.getlist('hashtags')
+        output = analyze.access(data)
         # Perform some analytics
 
-        return render_template('analytics.html', hashtags=data)
+        return render_template('analytics.html', hashtags=data, output=output)
     else:
         return "Wrong HTTP request"
 

@@ -11,7 +11,9 @@
   <script>
     function hashtags() {
       var hashtags = {{hashtags|tojson}};
+      var data = {{output|tojson}}
       console.log(hashtags);
+      console.log(data);
       for(i in hashtags) {
         //console.log(i);
       }
