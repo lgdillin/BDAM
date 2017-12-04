@@ -11,3 +11,7 @@ bson
 pyspark
 scikit-learn
 geotext
+geopy
+numpy
+matplotlib
+mpl_toolkits
