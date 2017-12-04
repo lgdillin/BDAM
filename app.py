@@ -40,7 +40,7 @@ def dashboard():
     collections = reader.tweetsDash()
     return render_template('tweetdashboard.html', collections=collections)
 
-# Landing page for analytics tools 
+# Landing page for analytics tools python
 @app.route('/analytics/', methods = ['GET', 'POST'])
 def analytics():
     if request.method == 'POST':

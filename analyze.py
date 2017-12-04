@@ -36,7 +36,7 @@ def getLocations(tweets):
             countries[country] += 1
     return countries
 
-def access(hashtags, filter):
+def access(hashtags, keyword):
     print('Connecting...')
     client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
     db = client['bdam']
@@ -46,8 +46,7 @@ def access(hashtags, filter):
     unfilteredhashtagsize = 0
     for hashtag in hashtags:
         collection = db['twitter_{0}'.format(hashtag)]
-        query = list(collection.find({"text":
-            {"$regex": " " + filter + " ", "$options": "i" } }, {'text':1,'_id':0} ))
+        query = list(collection.find({"text": {"$regex": " " + keyword + " ", "$options": "i" } }, {'text':1,'_id':0} ))
         unfilteredhashtagsize += len(query)
         results.extend(query)
 
