@@ -28,9 +28,13 @@ def freqDist(propernouns, hashtags):
     #return cfd.tabulate(conditions=hashtags, samples=propernouns)
 
 def getLocations(tweets):
-
+    # https://pythonprogramming.net/named-entity-recognition-stanford-ner-tagger/
+    # first tokenize, then tag
     words = []
     for tweet in tweets:
+
+        tokenized_text = word_tokenize(tweet)
+        classified_text = st
         words.append(tweet['text'].title())
     words = ' '.join(words)
     places = GeoText(str(words)).country_mentions
