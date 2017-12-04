@@ -34,6 +34,12 @@ body{
   text-align: left;
 }
 
+button{
+  position: fixed;
+  top: 40%;
+  left: 10%;
+}
+
 /*button {
   display: inline-block;
   margin: 0 10px 0 0;
