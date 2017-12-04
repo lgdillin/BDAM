@@ -8,7 +8,6 @@ from pymongo import MongoClient
 from bson.code import Code
 from bson.json_util import dumps
 from bson.son import SON
-from geotext import GeoText
 from geopy.geocoders import Nominatim
 from nltk import ne_chunk
 from nltk.chunk import conlltags2tree
@@ -16,8 +15,6 @@ from nltk.tag import pos_tag, pos_tag_sents, StanfordNERTagger
 from nltk.tokenize import word_tokenize
 
 def getLocations(tweets):
-    # https://pythonprogramming.net/named-entity-recognition-stanford-ner-tagger/
-    # first tokenize, then tag
     countries = {}
     places = []
     for tweet in tweets:
@@ -28,8 +25,6 @@ def getLocations(tweets):
             if 'GPE' in word[2]:
                 places.append(word[0])
 
-    #words = ' '.join(words)
-    #places = GeoText(str(words)).country_mentions
     geolocator = Nominatim()
     for place in places:
         location = geolocator.geocode(place)
@@ -41,13 +36,6 @@ def getLocations(tweets):
         else:
             countries[country] += 1
     return countries
-    # words = []
-    # citiesAndCountries = []
-    # for tweet in tweets:
-    #     words.extend(tweet['text'].title().split())
-    #
-    # for word in words:
-    #     i = GeoText(word)
 
 def access(hashtags, filter):
     print('Connecting...')
