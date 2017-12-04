@@ -44,7 +44,8 @@ button {
   appearance: none;
   box-shadow: none;
   border-radius: 0;
-  position: fixed;
+  position: relative;
+  left: 50%;
   top: 20%;
 }
 
