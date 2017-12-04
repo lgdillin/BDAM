@@ -33,25 +33,46 @@ negative_tweets = [(value, 'negative') for value in negative_tweets]
 positive_tweets = twitter_samples.strings('positive_tweets.json')
 positive_tweets = [(value, 'positive') for value in positive_tweets]
 
-# stick the two lists together and clean them
-tweets = []
-for (words, sentiment) in negative_tweets + positive_tweets:
+# Clean the lists and concatenate them
+ntweets = []
+ptweets = []
+for (words, sentiment) in negative_tweets:
     words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
-    tweets.append((words_filtered, sentiment))
+    ntweets.append((words_filtered, sentiment))
 
-word_features = get_word_features(get_words_in_tweets(tweets))
+for (words, sentiment) in positive_tweets:
+    words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
+    ptweets.append((words_filtered, sentiment))
+
+# split the datasets into training and test sets
+# the split is (training, test) -> (80, 20)
+ntweets_training = ntweets[:int(len(ntweets)*0.8)]
+ntweets_test = ntweets[int(len(ntweets)*0.8):]
+
+ptweets_training = ptweets[:int(len(ptweets)*0.8)]
+ptweets_test = ptweets[int(len(ptweets)*0.8):]
+
+training_tweets = ptweets_training + ntweets_training
+test_tweets = ptweets_test + ntweets_test
+
+word_features = get_word_features(get_words_in_tweets(training_tweets))
 
 # Build our training set
-training_set = nltk.classify.apply_features(extract_features, tweets)
+training_set = nltk.classify.apply_features(extract_features, training_tweets)
 
 # train the classifier
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 
 test = "Trump's foreign policy is damaging America's reputation globally."
 
+print("single test unit: ")
+print(test)
 print(classifier.classify(extract_features(test.split())))
 
-f = open('twitter_sentiment_analysis.pickle', 'wb')
+print("accuracy:")
+print(nltk.classify.accuracy(classifier, test_tweets))
+
+f = open('twitter_sentiment_analysis_tested.pickle', 'wb')
 pickle.dump(classifier, f)
 f.close()
 

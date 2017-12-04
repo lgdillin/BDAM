@@ -1,44 +1,42 @@
 import nltk
+import pycountry
 import pymongo
-
 import mapping as mapping
 
 from pymongo import MongoClient
 from bson.code import Code
-from bson.son import SON
 from bson.json_util import dumps
+from bson.son import SON
+from geotext import GeoText
+from geopy.geocoders import Nominatim
+from nltk import ne_chunk
+from nltk.chunk import conlltags2tree
 from nltk.tag import pos_tag, pos_tag_sents, StanfordNERTagger
 from nltk.tokenize import word_tokenize
-from geotext import GeoText
-
-
-# Returns all proper nouns from the set of tweets
-def findProperNouns(tweets):
-    nountuples = []
-    for tweet in tweets:
-        nountuples.extend(pos_tag(tweet['text'].split()))
-
-    propernouns = [word for word,pos in nountuples if pos == 'NNP']
-    return propernouns
-
-def freqDist(propernouns, hashtags):
-    cfd = nltk.ConditionalFreqDist( (hashtag, pnoun)
-        for hashtag in hashtags
-        for pnoun in propernouns)
-    #return cfd.tabulate(conditions=hashtags, samples=propernouns)
 
 def getLocations(tweets):
     # https://pythonprogramming.net/named-entity-recognition-stanford-ner-tagger/
     # first tokenize, then tag
-    words = []
+    countries = {}
+    places = []
     for tweet in tweets:
+        tweet['text'].title()
+        tagged_tweet = nltk.pos_tag(word_tokenize(tweet))
+        iob_tagged = tree2conlltags(nltk.chunk.ne_chunk(tagged_tweet))
+        for word in iob_tagged:
+            if 'GPE' in word[2]:
+                places.append(word[0])
 
-        tokenized_text = word_tokenize(tweet)
-        classified_text = st
-        words.append(tweet['text'].title())
-    words = ' '.join(words)
-    places = GeoText(str(words)).country_mentions
-    return places
+    #words = ' '.join(words)
+    #places = GeoText(str(words)).country_mentions
+    geolocator = Nominatim()
+    for place in places:
+        location = geolocator.geocode(place)
+        if not word in countries:
+            countries[word] = 1
+        else:
+            countries[word] += 1
+    return countries
     # words = []
     # citiesAndCountries = []
     # for tweet in tweets:
@@ -71,3 +69,20 @@ def access(hashtags, filter):
     #hashtagFreq = freqDist(propernouns, hashtags)
 
     return output
+
+
+
+# # Returns all proper nouns from the set of tweets
+# def findProperNouns(tweets):
+#     nountuples = []
+#     for tweet in tweets:
+#         nountuples.extend(pos_tag(tweet['text'].split()))
+#
+#     propernouns = [word for word,pos in nountuples if pos == 'NNP']
+#     return propernouns
+#
+# def freqDist(propernouns, hashtags):
+#     cfd = nltk.ConditionalFreqDist( (hashtag, pnoun)
+#         for hashtag in hashtags
+#         for pnoun in propernouns)
+#     #return cfd.tabulate(conditions=hashtags, samples=propernouns)

@@ -13,3 +13,4 @@ geopy
 geocoder
 pygal_maps_world
 places
+pycountry

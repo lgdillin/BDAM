@@ -12,3 +12,5 @@ def drawmap():
     #worldmap_chart.add(countries)
     #worldmap_chart.render_to_file('map.svg')
     return worldmap_chart
+
+# Get lat/long from address --> convert to country 
