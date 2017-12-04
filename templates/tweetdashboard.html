@@ -1,19 +1,40 @@
 <html>
   <head>
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   </head>
-
+  <title>KeyPop -- Who Approves?</title>
   <body bgcolor="#2E94D9" onload="parseColls()">
-    <h1 style="color: white;">Hashtag Collections</h1>
+    <div id = "whiteScreen">
+      <!-- section title, "How It Works" -->
+      <p id = "howTitle">Hashtag collections</p>
+      <!-- text for the "About" section -->
+      <p id = "howText" class = "how">
+      Click on an individual hashtag to view the contents of that collection.<br>
+      Check as many boxes as you wish and click the submit button to
+      use analytical tools to learn from the data. <br>
+
+      <div id="outputTitle"></div>
+      <div id="output"></div>
+
+      <form method="post" action="/analytics/" enctype="multipart/form-data" id="userform">
+        <table width="120px" id="dashboard">
+        </table>
+        <br>
+        <input type="text" id="keyword" name="filter" required>
+        <input type="submit" value="Submit selected">
+
+      <!-- simple footer text -->
+      <p id = "footer">Built by Liam Dillingham, Garrett Graham</p>
+    </div>
+    <!-- <h1 style="color: white;">Hashtag Collections</h1>
     click on an individual hashtag to view the contents of that collection.<br>
     check as many boxes as you wish and click the submit button to
     use analytical tools to learn from the data
-    <div id="title"></div>
-    <form method="post" action="/analytics/" enctype="multipart/form-data" id="userform">
-      <table width="120px" id="dashboard">
-      </table>
-      <br>
-      <input type="text" id="keyword" name="filter" required>
-      <input type="submit" value="Submit selected">
+    <div id="title"></div> -->
+
 
   </body>
 
