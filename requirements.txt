@@ -12,6 +12,4 @@ pyspark
 scikit-learn
 geotext
 geopy
-numpy
-matplotlib
-mpl_toolkits
+pygal_maps_world

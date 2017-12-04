@@ -4,6 +4,7 @@ from datetime import datetime
 #scripts built for this app
 import analyze as analyze
 import crawler as crawler
+import mapping as mapping
 import reader as reader
 
 app = Flask(__name__)
@@ -44,12 +45,26 @@ def dashboard():
 def analytics():
     if request.method == 'POST':
         data = request.form.getlist('hashtags')
-        output = analyze.access(data)
-        # Perform some analytics
+        filter = request.form.get('filter')
 
-        return render_template('analytics.html', hashtags=data, output=output)
+        # Perform some analytics
+        output = analyze.access(data, filter)
+
+        return render_template('analytics.html', hashtags=data, filter=filter, output=output)
     else:
         return "Wrong HTTP request"
+
+@app.route('/analytics/<filter>/', methods = ['GET', 'POST'])
+def analysisresults(filter):
+
+
+    return render_template('analytics.html', filter=filter)
+
+@app.route("/test/")
+def test():
+    chart = mapping.drawmap()
+    chart = chart.render_data_uri()
+    return render_template('test.html', chart=chart)
 
 # Used for drawing lexical graphs
 @app.route("/simple.png")

@@ -1,24 +1,14 @@
-import matplotlib.pyplot as plt
-#basemap import
-from mpl_toolkits.basemap import Basemap
-import numpy as np
+import pygal
 
-# Lambert Conformal map of USA lower 48
-m = Basemap(llcrnrlon=-119, llcrnrlat=22,  urcrnrlon=-64,
-  urcrnrlat=49, projection='lcc', lat_1=33, lat_2=45,
-  lon_0=-95, resolution='h', area_thresh=10000)
-
-# draw the coastlines of continental area
-m.drawcoastlines()
-# draw country boundaries
-m.drawcountries(linewidth=2)
-#draw states boundaries (America only)
-m.drawstates()
-#fill background
-m.drawmapboundary(fill_color='aqua')
-#fill continental area
-#color lakes like oceans
-m.fillcontinents(color='coral',lake_color='aqua')
-#draw parallels and meridians
-m.drawparallels(np.arange(25,65,20), labels=[1,0,0,0])
-m.drawmeridians(np.arange(-120,-40,20), labels=[0,0,0,1])
+def drawmap():
+    worldmap_chart = pygal.maps.world.World()
+    worldmap_chart.title = 'Some countries'
+    worldmap_chart.add('F countries', ['fr', 'fi'])
+    worldmap_chart.add('M countries', ['ma', 'mc', 'md', 'me', 'mg',
+                                   'mk', 'ml', 'mm', 'mn', 'mo',
+                                   'mr', 'mt', 'mu', 'mv', 'mw',
+                                   'mx', 'my', 'mz'])
+    worldmap_chart.add('U countries', ['ua', 'ug', 'us', 'uy', 'uz'])
+    #worldmap_chart.add(countries)
+    #worldmap_chart.render_to_file('map.svg')
+    return worldmap_chart
