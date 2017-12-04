@@ -7,8 +7,10 @@ from pymongo import MongoClient
 from bson.code import Code
 from bson.son import SON
 from bson.json_util import dumps
-from nltk.tag import pos_tag, pos_tag_sents
+from nltk.tag import pos_tag, pos_tag_sents, StanfordNERTagger
+from nltk.tokenize import word_tokenize
 from geotext import GeoText
+
 
 # Returns all proper nouns from the set of tweets
 def findProperNouns(tweets):
@@ -64,4 +66,4 @@ def access(hashtags, filter):
     # Show frequency distribution for hashtag(s)
     #hashtagFreq = freqDist(propernouns, hashtags)
 
-    return results
+    return output

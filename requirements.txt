@@ -8,8 +8,7 @@ pprint
 nltk
 datetime
 bson
-pyspark
-scikit-learn
 geotext
 geopy
 pygal_maps_world
+geograpy
