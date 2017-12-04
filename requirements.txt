@@ -11,4 +11,4 @@ geopy
 geocoder
 pygal_maps_world
 pycountry
-reverse_geocode
+reverse_geocoder

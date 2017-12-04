@@ -20,10 +20,8 @@ latlng = (location.latitude, location.longitude)
 print((location.latitude, location.longitude))
 coords = (30, 20)
 g = rg.search(coords,mode=1)
-print(g)
-print(g['cc'])
-for k in g:
-    print(k)
+print(g[0]['cc'])
+
 # for tup in g:
 #     print(tup)
 #     if 'cc' in tup[0]:

@@ -1,8 +1,8 @@
 import nltk
 import pycountry
 import pymongo
-import reverse_geocode
 import mapping as mapping
+import reverse_geocoder as rg
 
 from pymongo import MongoClient
 from bson.code import Code
@@ -33,12 +33,13 @@ def getLocations(tweets):
     geolocator = Nominatim()
     for place in places:
         location = geolocator.geocode(place)
-        latlng = (location.latitude, location.longitude)
-        reverse_geocode.search(coordinates)
-        if not word in countries:
-            countries[word] = 1
+        coordinates = (location.latitude, location.longitude)
+        translation = rg.search(coordinates, mode=1)
+        country = g[0]['cc']
+        if not country in countries:
+            countries[country] = 1
         else:
-            countries[word] += 1
+            countries[country] += 1
     return countries
     # words = []
     # citiesAndCountries = []
