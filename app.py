@@ -46,6 +46,8 @@ def analytics():
     if request.method == 'POST':
         data = request.form.getlist('hashtags')
         keyword = request.form.get('keyword')
+        print(data)
+        print(keyword)
 
         # Perform some analytics
         output = analyze.access(data, keyword)

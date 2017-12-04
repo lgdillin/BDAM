@@ -50,7 +50,7 @@ def access(hashtags, keyword):
         unfilteredhashtagsize += len(query)
         results.extend(query)
 
-    output = getLocations(results)
+    #output = getLocations(results)
 
     # Extract all proper nouns from tweets under given hastag(s)
     #propernouns = findProperNouns(results)
