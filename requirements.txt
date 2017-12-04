@@ -11,3 +11,4 @@ bson
 geotext
 geopy
 pygal_maps_world
+places
