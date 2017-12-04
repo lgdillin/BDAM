@@ -1,3 +1,8 @@
+import geocoder
+# http://geocoder.readthedocs.io/providers/Google.html#geocoding
+g = geocoder.google("LA")
+print(g)
+
 # import nltk
 # import os
 # from nltk.tag.stanford import StanfordNERTagger
@@ -36,6 +41,10 @@
 #
 # # You can now access all of the places found by the Extractor
 # print (e.places)
+
+
+
+
 
 
 

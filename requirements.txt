@@ -10,5 +10,6 @@ datetime
 bson
 geotext
 geopy
+geocoder
 pygal_maps_world
 places
