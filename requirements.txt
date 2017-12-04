@@ -3,14 +3,11 @@ mongoengine
 gunicorn
 pymongo
 tweepy
-werkzeug
 pprint
 nltk
 datetime
 bson
-geotext
 geopy
 geocoder
 pygal_maps_world
-places
 pycountry

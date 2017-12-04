@@ -45,20 +45,20 @@ def dashboard():
 def analytics():
     if request.method == 'POST':
         data = request.form.getlist('hashtags')
-        filter = request.form.get('filter')
+        keyword = request.form.get('keyword')
 
         # Perform some analytics
-        output = analyze.access(data, filter)
+        output = analyze.access(data, keyword)
 
-        return render_template('analytics.html', hashtags=data, filter=filter, output=output)
+        return render_template('analytics.html', hashtags=data, keyword=keyword, output=output)
     else:
         return "Wrong HTTP request"
 
-@app.route('/analytics/<filter>/', methods = ['GET', 'POST'])
-def analysisresults(filter):
+@app.route('/analytics/<keyword>/', methods = ['GET', 'POST'])
+def analysisresults(keyword):
 
 
-    return render_template('analytics.html', filter=filter)
+    return render_template('analytics.html', keyword=keyword)
 
 @app.route("/test/")
 def test():
