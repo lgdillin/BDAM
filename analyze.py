@@ -10,7 +10,7 @@ from bson.son import SON
 from geopy.geocoders import Nominatim
 from nltk import ne_chunk
 from nltk.chunk import conlltags2tree
-from nltk.tag import pos_tag, pos_tag_sents, StanfordNERTagger
+from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 
 def getLocations(tweets):
