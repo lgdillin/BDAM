@@ -1,5 +1,4 @@
 import nltk
-import pycountry
 import pymongo
 import mapping as mapping
 import reverse_geocoder as rg
