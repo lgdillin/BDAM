@@ -34,7 +34,7 @@ body{
   text-align: left;
 }
 
-button {
+/*button {
   display: inline-block;
   margin: 0 10px 0 0;
   padding: 15px 45px;
@@ -76,4 +76,4 @@ section.border button:active,
 section.border button.active {
   border-color: #27496d;
   color: #27496d;
-}
+}*/
