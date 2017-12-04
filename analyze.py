@@ -7,8 +7,9 @@ from bson.code import Code
 from bson.son import SON
 from bson.json_util import dumps
 
-from nltk.tag import pos_tag
-NLTK_DATA = './tagger/'
+from nltk.tag import pos_tag, pos_tag_sents
+
+from geotext import GeoText
 # from sklearn.pipeline import Pipeline
 # from sklearn.preprocessing import LabelEncoder
 # from sklearn.linear_model import SGDClassifier
@@ -16,14 +17,38 @@ NLTK_DATA = './tagger/'
 # from sklearn.feature_extraction.text import TfidfVectorizer
 # from sklearn.cross_validation import train_test_split as tts
 
+# Returns all proper nouns from the set of tweets
 def findProperNouns(tweets):
     nountuples = []
     for tweet in tweets:
-        print(tweet)
         nountuples.extend(pos_tag(tweet['text'].split()))
 
     propernouns = [word for word,pos in nountuples if pos == 'NNP']
     return propernouns
+
+def freqDist(propernouns, hashtags):
+    cfd = nltk.ConditionalFreqDist( (hashtag, pnoun)
+        for hashtag in hashtags
+        for pnoun in propernouns)
+    #return cfd.tabulate(conditions=hashtags, samples=propernouns)
+
+def getLocations(tweets):
+
+    words = []
+    for tweet in tweets:
+        words.append(tweet['text'].title())
+    words = ' '.join(words)
+    places = GeoText(str(words)).country_mentions
+    return places
+    # words = []
+    # citiesAndCountries = []
+    # for tweet in tweets:
+    #     words.extend(tweet['text'].title().split())
+    #
+    # for word in words:
+    #     i = GeoText(word)
+
+#def cleanTweets
 
 def access(hashtags):
     print('Connecting...')
@@ -33,13 +58,19 @@ def access(hashtags):
 
     results = []
     for hashtag in hashtags:
-        print(hashtag)
         collection = db['twitter_{0}'.format(hashtag)]
         results.extend(list(collection.find({}, {'text':1,'_id':0} )))
 
-    propernouns = findProperNouns(results)
+    #output = getLocations(results)
 
-    return propernouns
+
+    # Extract all proper nouns from tweets under given hastag(s)
+    #propernouns = findProperNouns(results)
+
+    # Show frequency distribution for hashtag(s)
+    #hashtagFreq = freqDist(propernouns, hashtags)
+
+    return output
 
 
 

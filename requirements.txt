@@ -10,3 +10,4 @@ datetime
 bson
 pyspark
 scikit-learn
+geotext

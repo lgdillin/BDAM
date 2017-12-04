@@ -1,1 +1,3 @@
 averaged_perceptron_tagger
+twitter_samples
+wordnet
