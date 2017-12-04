@@ -1,14 +1,33 @@
+# from googlemaps import Client as GoogleMaps
+# gmaps = GoogleMaps('AIzaSyBNWdotOWNa3HHtE8BxKr4Z2EfqYUjGXHg')
+# address = 'LA'
+# (lat, lng) = gmaps.addres_to_latlng(address)
+# print(lat, lng)
+
+
+
 # import geocoder
 # # http://geocoder.readthedocs.io/providers/Google.html#geocoding
 # g = geocoder.google('LA')
 # print(g)
 
 from geopy.geocoders import Nominatim
+import reverse_geocoder as rg
+import os
 geolocator = Nominatim()
 location = geolocator.geocode("175 5th Avenue NYC")
-print(location.raw)
-
-#print(g.geojson.country)
+latlng = (location.latitude, location.longitude)
+print((location.latitude, location.longitude))
+coords = (30, 20)
+g = rg.search(coords,mode=1)
+print(g)
+print(g['cc'])
+for k in g:
+    print(k)
+# for tup in g:
+#     print(tup)
+#     if 'cc' in tup[0]:
+#         print(tup[1])
 
 # import nltk
 # from nltk.tokenize import word_tokenize
