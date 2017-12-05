@@ -18,17 +18,16 @@ from nltk.chunk import conlltags2tree, tree2conlltags
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, TweetTokenizer
 
+f = open('twitter_sentiment_analysis_tested.pickle', 'rb')
+classifier = pickle.load(f)
+tweet_features = sentiment.getTweetFeatures()
+word_features = sentiment.get_word_features(sentiment.get_words_in_tweets(tweet_features))
+f.close()
 
 
 def BuildDataset(locations):
 
     # Load the classifier
-    f = open('twitter_sentiment_analysis_tested.pickle', 'rb')
-    classifier = pickle.load(f)
-    tweet_features = sentiment.getTweetFeatures()
-    word_features = sentiment.get_word_features(sentiment.get_words_in_tweets(tweet_features))
-    f.close()
-
     #countries = {}
     data = []
     geolocator = Nominatim()
