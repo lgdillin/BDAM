@@ -20,6 +20,13 @@ from nltk.tokenize import word_tokenize, TweetTokenizer
 
 def BuildDataset(locations):
 
+    # Load the classifier
+    f = open('twitter_sentiment_analysis_tested.pickle', 'rb')
+    classifier = pickle.load(f)
+    tweet_features = sentiment.getTweetFeatures()
+    word_features = sentiment.get_word_features(sentiment.get_words_in_tweets(tweet_features))
+    f.close()
+
     #countries = {}
     data = []
     geolocator = Nominatim()
@@ -28,7 +35,8 @@ def BuildDataset(locations):
         # Give the tweet a positive/negative label
         # extract_features(location['text'].split())
         text = location['text']
-        sent = sentiment.classifyString(text)
+        print("THIS IS THE TEXT ", text)
+        sent = sentiment.classifyString(text, classifier, word_features)
 
 
 
@@ -49,7 +57,7 @@ def BuildDataset(locations):
         #     countries[country] += 1
 
         datapoint = (country, sent)
-        data.insert(datapoint)
+        data.extend(datapoint)
     return data
 
 

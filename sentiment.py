@@ -25,7 +25,15 @@ def extract_features(document, word_features):
     return features
 
 
-def classifyString(string):
+def classifyString(string, classifier, word_features):
+    classifier = classifier
+    word_features = word_features
+    result = classifier.classify(extract_features(string.split(), word_features))
+    return result
+
+
+
+def getTweetFeatures():
     # Give a dataset of tweets its respective sentiment
     negative_tweets = twitter_samples.strings('negative_tweets.json')
     negative_tweets = [(value, 'negative') for value in negative_tweets]
@@ -55,21 +63,14 @@ def classifyString(string):
     training_tweets = ptweets_training + ntweets_training
     test_tweets = ptweets_test + ntweets_test
 
-    word_features = get_word_features(get_words_in_tweets(training_tweets))
-
     # Build our training set
-    training_set = nltk.classify.apply_features(extract_features, training_tweets)
+    #training_set = nltk.classify.apply_features(extract_features, training_tweets)
 
     # train the classifier
     #classifier = nltk.classify.NaiveBayesClassifier.train(training_set)
-    f = open('twitter_sentiment_analysis_tested.pickle', 'rb')
-    classifier = pickle.load(f)
-    f.close()
 
     #classifier.show_most_informative_features(15)
-    result = classifier.classify(extract_features(string.split(), word_features))
-    print(result)
-    return result
+    return training_tweets
 
 #f = open('twitter_sentiment_analysis_tested.pickle', 'wb')
 #pickle.dump(classifier, f)
