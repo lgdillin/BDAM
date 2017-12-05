@@ -1,78 +1,92 @@
 import nltk
 import pymongo
 import mapping as mapping
-#import reverse_geocoder as rg
+import reverse_geocoder as rg
+import pickle
 
+from geotext import GeoText
 from pymongo import MongoClient
 from bson.code import Code
 from bson.json_util import dumps
 from bson.son import SON
 from geopy.geocoders import Nominatim
 from nltk import ne_chunk
-from nltk.chunk import conlltags2tree
+from nltk.chunk import conlltags2tree, tree2conlltags
 from nltk.tag import pos_tag
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, TweetTokenizer
 
-def getLocations(tweets):
+
+def getLocations(locations):
     countries = {}
-    places = []
-    for tweet in tweets:
-        print("IN LOOP")
-        tweet['text'].title()
-        print("TITLE SUCCESSFUL")
-        #tagged_tweet = nltk.pos_tag(word_tokenize(tweet))
-        x = word_tokenize(tweet)
-        print("x  ", x)
-        y = nltk.pos_tag(x)
-        print("y  ", y)
-        iob_tagged = tree2conlltags(nltk.chunk.ne_chunk(tagged_tweet))
-        print("iob")
-        for word in iob_tagged:
-            if 'GPE' in word[2]:
-                print("here")
-                places.append(word[0])
-
-    print("PLACES:   ", places)
     geolocator = Nominatim()
-    for place in places:
-        location = geolocator.geocode(place)
+    for location in locations:
+        location = location['user']['location'].title()
+        location = geolocator.geocode(location)
+
+        # If the location is garbage...
+        if location is None:
+            continue
+
         coordinates = (location.latitude, location.longitude)
         translation = rg.search(coordinates, mode=1)
-        country = g[0]['cc']
+        country = translation[0]['cc']
         if not country in countries:
             print(country)
             countries[country] = 1
         else:
             countries[country] += 1
-    print(countries)
     return countries
 
-def access(hashtags, keyword):
+
+def getSentiment(tweets):
+    f = open('my_classifier.pickle', 'rb')
+    classifier = pickle.load(f)
+    f.close()
+
+def getTweets(hashtags, keyword):
     print('Connecting...')
     client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
     db = client['bdam']
     print('Connected')
 
+
+    query = {"user.location":{"$ne": ""},"text":{"$regex":"'+keyword+'","$options":"i"}}
     results = []
     unfilteredhashtagsize = 0
     for hashtag in hashtags:
         collection = db['twitter_{0}'.format(hashtag)]
-        query = list(collection.find({"text": {"$regex": " " + keyword + " ", "$options": "i" } }, {'text':1,'_id':0} ))
-        unfilteredhashtagsize += len(query)
-        results.extend(query)
+        docs = list(collection.find({"user.location":{"$ne": ""},"text":{"$regex":keyword,"$options":"i"}}))
 
-    print("results", results)
-    output = getLocations(results)
-    #output = "heey"
-    # Extract all proper nouns from tweets under given hastag(s)
-    #propernouns = findProperNouns(results)
+        unfilteredhashtagsize += len(docs)
+        results.extend(docs)
 
-    # Show frequency distribution for hashtag(s)
-    #hashtagFreq = freqDist(propernouns, hashtags)
-
-    return
+    locations = getLocations(results)
+    sentiment = getSentiment(results)
+    return locations
 
 
+
+
+# def access(hashtags, keyword):
+#     print('Connecting...')
+#     client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
+#     db = client['bdam']
+#     print('Connected')
+#
+#     results = []
+#     unfilteredhashtagsize = 0
+#     for hashtag in hashtags:
+#         collection = db['twitter_{0}'.format(hashtag)]
+#         query = list(collection.find({"text": {"$regex": " " + keyword + " ", "$options": "i" } }, {'text':1,'_id':0} ))
+#         unfilteredhashtagsize += len(query)
+#         results.extend(query)
+#     output = getLocations(results)
+#     #output = "heey"
+#     # Extract all proper nouns from tweets under given hastag(s)
+#     #propernouns = findProperNouns(results)
+#     # Show frequency distribution for hashtag(s)
+#     #hashtagFreq = freqDist(propernouns, hashtags)
+#     return
 
 # # Returns all proper nouns from the set of tweets
 # def findProperNouns(tweets):

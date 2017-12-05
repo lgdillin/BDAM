@@ -50,7 +50,7 @@ def analytics():
         print(keyword)
 
         # Perform some analytics
-        output = analyze.access(data, keyword)
+        output = analyze.getTweets(data, keyword)
 
         return render_template('analytics.html', data=data, keyword=keyword, output=output)
     else:

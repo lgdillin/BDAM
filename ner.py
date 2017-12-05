@@ -4,23 +4,45 @@
 # (lat, lng) = gmaps.addres_to_latlng(address)
 # print(lat, lng)
 
-
-
 # import geocoder
 # # http://geocoder.readthedocs.io/providers/Google.html#geocoding
 # g = geocoder.google('LA')
 # print(g)
 #
-from geopy.geocoders import Nominatim
+
+#
+# from geopy.geocoders import Nominatim
+# import reverse_geocoder as rg
+# import os
+# geolocator = Nominatim()
+# location = geolocator.geocode("Just North Of San Antonio")
+# coords = (location.latitude, location.longitude)
+# print((location.latitude, location.longitude))
+# g = rg.search(coords,mode=1)
+# print(g[0]['cc'])
+#
+
+# import nltk
+# sentence = "Just North Of San Antonio"
+# tagged = nltk.pos_tag(sentence)
+# entities = nltk.chunk.ne_chunk(sentence)
+# print(tagged)
 import reverse_geocoder as rg
-import os
+from geotext import GeoText
+from geopy.geocoders import Nominatim
 geolocator = Nominatim()
-location = geolocator.geocode("175 5th Avenue NYC")
-latlng = (location.latitude, location.longitude)
-print((location.latitude, location.longitude))
-coords = (30, 20)
-g = rg.search(coords,mode=1)
-print(g[0]['cc'])
+location = "KY"
+# city = GeoText(location)
+# if city.cities == []:
+#     location = geolocator.geocode(location)
+# else:
+#     location = str(city.cities[0])
+location = geolocator.geocode(location)
+coordinates = (location.latitude, location.longitude)
+translation = rg.search(coordinates, mode=1)
+country = translation[0]['cc']
+print(country)
+
 
 # for tup in g:
 #     print(tup)
