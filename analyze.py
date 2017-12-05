@@ -2,6 +2,7 @@ import nltk
 import pymongo
 import mapping as mapping
 import reverse_geocoder as rg
+import sentiment as sentiment
 import pickle
 
 from geotext import GeoText
@@ -16,10 +17,21 @@ from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, TweetTokenizer
 
 
-def getLocations(locations):
-    countries = {}
+
+def BuildDataset(locations):
+
+    #countries = {}
+    data = []
     geolocator = Nominatim()
     for location in locations:
+
+        # Give the tweet a positive/negative label
+        # extract_features(location['text'].split())
+        text = location['text']
+        sent = sentiment.classifyString(text)
+
+
+
         location = location['user']['location'].title()
         location = geolocator.geocode(location)
 
@@ -30,18 +42,16 @@ def getLocations(locations):
         coordinates = (location.latitude, location.longitude)
         translation = rg.search(coordinates, mode=1)
         country = translation[0]['cc']
-        if not country in countries:
-            print(country)
-            countries[country] = 1
-        else:
-            countries[country] += 1
-    return countries
+        # if not country in countries:
+        #     print(country)
+        #     countries[country] = 1
+        # else:
+        #     countries[country] += 1
 
+        datapoint = (country, sent)
+        data.insert(datapoint)
+    return data
 
-def getSentiment(tweets):
-    f = open('my_classifier.pickle', 'rb')
-    classifier = pickle.load(f)
-    f.close()
 
 def getTweets(hashtags, keyword):
     print('Connecting...')
@@ -60,8 +70,9 @@ def getTweets(hashtags, keyword):
         unfilteredhashtagsize += len(docs)
         results.extend(docs)
 
-    locations = getLocations(results)
-    sentiment = getSentiment(results)
+    dataset = BuildDataset(results)
+    dictionary = dict(dataset)
+    print(dictionary)
     return locations
 
 
