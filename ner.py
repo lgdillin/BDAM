@@ -10,17 +10,17 @@
 # # http://geocoder.readthedocs.io/providers/Google.html#geocoding
 # g = geocoder.google('LA')
 # print(g)
-# 
-# from geopy.geocoders import Nominatim
-# import reverse_geocoder as rg
-# import os
-# geolocator = Nominatim()
-# location = geolocator.geocode("175 5th Avenue NYC")
-# latlng = (location.latitude, location.longitude)
-# print((location.latitude, location.longitude))
-# coords = (30, 20)
-# g = rg.search(coords,mode=1)
-# print(g[0]['cc'])
+#
+from geopy.geocoders import Nominatim
+import reverse_geocoder as rg
+import os
+geolocator = Nominatim()
+location = geolocator.geocode("175 5th Avenue NYC")
+latlng = (location.latitude, location.longitude)
+print((location.latitude, location.longitude))
+coords = (30, 20)
+g = rg.search(coords,mode=1)
+print(g[0]['cc'])
 
 # for tup in g:
 #     print(tup)

@@ -1,7 +1,7 @@
 import nltk
 import pymongo
 import mapping as mapping
-import reverse_geocoder as rg
+#import reverse_geocoder as rg
 
 from pymongo import MongoClient
 from bson.code import Code
@@ -31,9 +31,11 @@ def getLocations(tweets):
         translation = rg.search(coordinates, mode=1)
         country = g[0]['cc']
         if not country in countries:
+            print(country)
             countries[country] = 1
         else:
             countries[country] += 1
+    print(countries)
     return countries
 
 def access(hashtags, keyword):
@@ -50,15 +52,16 @@ def access(hashtags, keyword):
         unfilteredhashtagsize += len(query)
         results.extend(query)
 
-    #output = getLocations(results)
-    output = "heey"
+    print(results)
+    output = getLocations(results)
+    #output = "heey"
     # Extract all proper nouns from tweets under given hastag(s)
     #propernouns = findProperNouns(results)
 
     # Show frequency distribution for hashtag(s)
     #hashtagFreq = freqDist(propernouns, hashtags)
 
-    return output
+    return
 
 
 

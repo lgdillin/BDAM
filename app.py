@@ -52,7 +52,7 @@ def analytics():
         # Perform some analytics
         output = analyze.access(data, keyword)
 
-        return render_template('analytics.html', hashtags=data, keyword=keyword, output=output)
+        return render_template('analytics.html', data=data, keyword=keyword, output=output)
     else:
         return "Wrong HTTP request"
 
