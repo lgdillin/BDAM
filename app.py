@@ -52,7 +52,9 @@ def analytics():
         # Perform some analytics
         output = analyze.getTweets(data, keyword)
 
-        return render_template('analytics.html', data=data, keyword=keyword, output=output)
+        chart = output.render_data_uri()
+        return render_template('test.html', chart=chart)
+        #return render_template('analytics.html', data=data, keyword=keyword, output=output)
     else:
         return "Wrong HTTP request"
 

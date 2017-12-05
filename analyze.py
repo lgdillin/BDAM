@@ -4,7 +4,9 @@ import mapping as mapping
 import reverse_geocoder as rg
 import sentiment as sentiment
 import pickle
+import operator
 
+from collections import defaultdict, Counter
 from geotext import GeoText
 from pymongo import MongoClient
 from bson.code import Code
@@ -35,7 +37,6 @@ def BuildDataset(locations):
         # Give the tweet a positive/negative label
         # extract_features(location['text'].split())
         text = location['text']
-        print("THIS IS THE TEXT ", text)
         sent = sentiment.classifyString(text, classifier, word_features)
 
 
@@ -49,7 +50,7 @@ def BuildDataset(locations):
 
         coordinates = (location.latitude, location.longitude)
         translation = rg.search(coordinates, mode=1)
-        country = translation[0]['cc']
+        country = translation[0]['cc'].lower()
         # if not country in countries:
         #     print(country)
         #     countries[country] = 1
@@ -57,7 +58,7 @@ def BuildDataset(locations):
         #     countries[country] += 1
 
         datapoint = (country, sent)
-        data.extend(datapoint)
+        data.append(datapoint)
     return data
 
 
@@ -79,9 +80,24 @@ def getTweets(hashtags, keyword):
         results.extend(docs)
 
     dataset = BuildDataset(results)
-    dictionary = dict(dataset)
-    print(dictionary)
-    return locations
+    d2 = defaultdict(float)
+    d1 = defaultdict(float)
+
+    # Build the numerator
+    for country in dataset:
+        if country[1] == 'positive':
+            d2[country[0]] += 1
+        else:
+            d2[country[0]] = 0
+
+    # Build the denominator
+    for country in dataset:
+        d1[country[0]] += 1
+
+    print(d2)
+    print(d1)
+    final = {k: d2[k]/d1[k] for k in d1.keys() & d2}
+    return mapping.drawmap(keyword,final)
 
 
 
