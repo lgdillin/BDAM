@@ -24,6 +24,7 @@ def getLocations(tweets):
             if 'GPE' in word[2]:
                 places.append(word[0])
 
+    print("PLACES:   ", places)
     geolocator = Nominatim()
     for place in places:
         location = geolocator.geocode(place)
@@ -52,7 +53,7 @@ def access(hashtags, keyword):
         unfilteredhashtagsize += len(query)
         results.extend(query)
 
-    print(results)
+    print("results", results)
     output = getLocations(results)
     #output = "heey"
     # Extract all proper nouns from tweets under given hastag(s)
