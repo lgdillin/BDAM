@@ -17,11 +17,19 @@ def getLocations(tweets):
     countries = {}
     places = []
     for tweet in tweets:
+        print("IN LOOP")
         tweet['text'].title()
-        tagged_tweet = nltk.pos_tag(word_tokenize(tweet))
+        print("TITLE SUCCESSFUL")
+        #tagged_tweet = nltk.pos_tag(word_tokenize(tweet))
+        x = word_tokenize(tweet)
+        print("x  ", x)
+        y = nltk.pos_tag(x)
+        print("y  ", y)
         iob_tagged = tree2conlltags(nltk.chunk.ne_chunk(tagged_tweet))
+        print("iob")
         for word in iob_tagged:
             if 'GPE' in word[2]:
+                print("here")
                 places.append(word[0])
 
     print("PLACES:   ", places)

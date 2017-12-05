@@ -1,4 +1,5 @@
 Flask
+werkzeug
 mongoengine
 gunicorn
 pymongo
