@@ -10,12 +10,17 @@
       <p id = "howText" class = "how">
       Click on an individual hashtag to view the contents of that collection.<br>
       Check as many boxes as you wish and click the submit button to
-      use analytical tools to learn from the data. <br>
+      use analytical tools to learn from the data. <br><br><br>
+
+      <b>NOTE:</b><br>
+      Because this application runs on a free-tier platform, please limit <br>
+      yourself to 3 checkboxes, otherwise the application will crash <br>
+      due to timeout and memory overuse <br>
 
       <div id="outputTitle"></div>
       <div id="output"></div>
 
-      <form method="post" action="/analytics/" enctype="multipart/form-data" id="userform">
+      <form method="post" action="/analytics/" enctype="multipart/form-data" name="userform" id="userform">
         <table width="250px" id="dashboard">
         </table>
         <br>
@@ -24,7 +29,12 @@
 
 
         <br><br>
-      <!-- simple footer text -->
+      </form>
+
+      <!-- Execute checkbox limiter -->
+      
+
+
     </div>
   </body>
 
@@ -45,5 +55,22 @@
         );
       }
     }
+
+    function checkBoxLimit() {
+    var checkBoxGroup = document.forms.userform.hashtags;
+    var limit = 2;
+    for (var i = 0; i < checkBoxGroup.length; i++) {
+        checkBoxGroup[i].onclick = function() {
+            var checkedcount = 0;
+            for (var i = 0; i < checkBoxGroup.length; i++) {
+                checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;
+            }
+            if (checkedcount > limit) {
+                alert("You can select only a maximum of " + limit + " checkboxes.");
+                this.checked = false;
+            }
+        }
+    }
+  }
   </script>
 </html>
