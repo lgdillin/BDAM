@@ -2,7 +2,6 @@ import nltk
 import pymongo
 import mapping as mapping
 import reverse_geocoder as rg
-import sentiment as sentiment
 import pickle
 import operator
 
@@ -18,13 +17,13 @@ from nltk.chunk import conlltags2tree, tree2conlltags
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, TweetTokenizer
 
-f = open('twitter_sentiment_analysis_tested.pickle', 'rb')
-
+f = open('naive-bayes-twitter.pickle', 'rb')
 classifier = pickle.load(f)
-tweet_features = sentiment.getTweetFeatures()
-word_features = sentiment.get_word_features(sentiment.get_words_in_tweets(tweet_features))
 f.close()
 
+# this is necessary for the classifier to break down sentences
+def format_sentence(sent):
+    return({word: True for word in nltk.word_tokenize(sent)})
 
 def BuildDataset(locations):
 
@@ -37,12 +36,13 @@ def BuildDataset(locations):
         # Give the tweet a positive/negative label
         # extract_features(location['text'].split())
         text = location['text']
-        sent = sentiment.classifyString(text, classifier, word_features)
+        #sent = sentiment.classifyString(text, classifier, word_features)
+        sent = classifier.classify(format_sentence(text))
 
 
 
         location = location['user']['location'].title()
-        location = geolocator.geocode(location)
+        location = geolocator.geocode(location, timeout=None)
 
         # If the location is garbage...
         if location is None:
