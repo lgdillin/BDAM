@@ -7,8 +7,6 @@ def drawmap(keyword, countries):
     worldmap_chart = pygal.maps.world.World()
     worldmap_chart.title = 'Positive Sentimental value towards: ' + keyword
     worldmap_chart.add('+Percentage', countries)
-    #worldmap_chart.add(countries)
-    #worldmap_chart.render_to_file('map.svg')
     return worldmap_chart
 
 # Get lat/long from address --> convert to country

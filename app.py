@@ -50,25 +50,13 @@ def analytics():
         print(keyword)
 
         # Perform some analytics
-        output = analyze.getTweets(data, keyword)
+        output, values = analyze.getTweets(data, keyword)
 
-        chart = output.render_data_uri()
-        return render_template('test.html', chart=chart)
+        chart = mapping.drawmap(keyword, output).render_data_uri()
+        return render_template('results.html', chart=chart, output=output, values=values)
         #return render_template('analytics.html', data=data, keyword=keyword, output=output)
     else:
         return "Wrong HTTP request"
-
-@app.route('/analytics/<keyword>/', methods = ['GET', 'POST'])
-def analysisresults(keyword):
-
-
-    return render_template('analytics.html', keyword=keyword)
-
-@app.route("/test/")
-def test():
-    chart = mapping.drawmap()
-    chart = chart.render_data_uri()
-    return render_template('test.html', chart=chart)
 
 # Used for drawing lexical graphs
 @app.route("/simple.png")
@@ -103,3 +91,16 @@ def simple():
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
+
+
+# @app.route('/analytics/<keyword>/', methods = ['GET', 'POST'])
+# def analysisresults(keyword):
+#
+#
+#     return render_template('analytics.html', keyword=keyword)
+#
+# @app.route("/test/")
+# def test():
+#     chart = mapping.drawmap()
+#     chart = chart.render_data_uri()
+#     return render_template('test.html', chart=chart)

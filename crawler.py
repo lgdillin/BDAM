@@ -20,13 +20,10 @@ consumer_secret = 'LKi0n0ZlyU4fTElfp8CBOOw89YFhEyl7P9tRB2DrILTVWsKDo5'
 access_token = '910189018905825285-W0P6aue3kstAqK3RoEFJAGIWYvtpIOZ'
 access_token_secret = 'Fljltt5C7deqlr91kkzA6WwO14KZlyqFgG0AHoum6Oy0L'
 
-#
 auth = OAuthHandler(consumer_key, consumer_secret)
 
-#
 auth.set_access_token(access_token, access_token_secret)
 
-#
 api = tweepy.API(auth, wait_on_rate_limit=True,
                      wait_on_rate_limit_notify=True)
 
@@ -34,14 +31,6 @@ api = tweepy.API(auth, wait_on_rate_limit=True,
 if (not api):
     print ("Can't Authenticate")
     sys.exit(-1)
-# mongodb://heroku_n2tfcpfx:d09ttqk88oe9r5ag0v2okkj0bs@dbh30.mlab.com:27307/heroku_n2tfcpfx
-# client = MongoClient('mongodb://heroku_n2tfcpfx:d09ttqk88oe9r5ag0v2okkj0bs@dbh30.mlab.com:27307/heroku_n2tfcpfx', 27307)
-# client = open(os.path.dirname(os.path.realpath("test.txt")), "r")
-# print(client.read())
-#client = MongoClient('mongodb://lgdillin:Big.Data-1@bdam-shard-00-00-awflg.mongodb.net:27017,bdam-shard-00-01-awflg.mongodb.net:27017,bdam-shard-00-02-awflg.mongodb.net:27017/test?ssl=true&replicaSet=bdam-shard-0&authSource=admin', 27017)
-#client = MongoClient('mongodb://admin:Big.Data-1@ds147034.mlab.com:47034/tweets')
-#client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
-
 
 
 client = MongoClient('mongodb://admin:admin@ds229435.mlab.com:29435/bdam')
@@ -57,11 +46,9 @@ last_mon = str(datetime.date.today() -
 def initializeCrawler(hashtag):
     # Query terms for twitter
     searchQuery = hashtag
-    #searchQuery = hashtag
 
     # Execute the Crawler
     crawler(searchQuery=searchQuery)
-
 
 
 def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
@@ -70,7 +57,6 @@ def crawler(searchQuery, maxTweets=100, tweetsPerQry=100):
         max_id = -1# LS
         tweetCount = 0
         collection = db['twitter_{0}'.format(searchQuery)]
-        #collection = db['twitter_{0}'.format(word[1:])]
         while tweetCount < maxTweets:
             try:
                 if (max_id <= 0):
